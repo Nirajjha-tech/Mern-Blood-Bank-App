@@ -50,7 +50,7 @@ if(existingUser){
       success: false,
       message: "Error in Register API",
       error,
-    });
+    }); 
   }
 };
 
