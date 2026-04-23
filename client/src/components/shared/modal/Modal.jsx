@@ -22,7 +22,7 @@ const Modal = () => {
       //  Payload
       const payload = {
         email,
-        organisation: user._Id,
+        organisation: user._id,
         inventoryType,  
         bloodgroup,
         quantity,

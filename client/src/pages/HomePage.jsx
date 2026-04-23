@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Spinner from "../components/shared/spinner";
 import Layout from "../components/shared/Layout/Layout";
+import { useNavigate } from "react-router-dom";
 import Modal from "../components/shared/modal/Modal";
 import API from "../services/Api";
 import moment from 'moment'
 const HomePage = () => {
-  const { loading, error } = useSelector((state) => state.auth);
+  const { loading, error ,user} = useSelector((state) => state.auth);
   const [data, setData] = useState([]);
+  const navigate=useNavigate();
   const getBloodRecords = async () => {
     try {
       const res = await API.get("/inventory/get-inventory");
@@ -24,6 +26,7 @@ if (res?.data?.success) {
   }, []);
   return (
     <Layout>
+      {user?.role=== 'admin' && navigate("/admin")}
       {error && <span>{alert(error)}</span>}
       {loading ? (
         <Spinner />
@@ -46,7 +49,7 @@ if (res?.data?.success) {
                   <th scope="col">Blood Group</th>
                   <th scope="col">Inventory</th>
                   <th scope="col">Quantity(ml)</th>
-                  <th scope="col">Donor Email</th>
+                  <th scope="col">{user?.role}</th>
                   <th scope="col">Time and Date</th>
                 </tr>
               </thead>

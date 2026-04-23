@@ -1,4 +1,6 @@
 const JWT = require("jsonwebtoken");
+const userModel = require("../models/userModel"); // 🔥 add this
+
 module.exports = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
@@ -12,22 +14,27 @@ module.exports = async (req, res, next) => {
 
     const token = authHeader.split(" ")[1];
 
-    JWT.verify(token, process.env.JWT_SECRET, (err, decode) => {
-      if (err) {
-        return res.status(401).send({
-          success: "false",
-          message: "Auth Failed",
-        });
-      } else {
-        req.userId = decode.userId;
-        next();
-      }
-    });
+    const decode = JWT.verify(token, process.env.JWT_SECRET);
+
+    
+    const user = await userModel.findById(decode.userId);
+
+    if (!user) {
+      return res.status(401).send({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    req.userId = user._id;
+    req.user = user;
+
+    next();
+
   } catch (error) {
     console.log(error);
     return res.status(401).send({
       success: false,
-      error,
       message: "Auth failed",
     });
   }

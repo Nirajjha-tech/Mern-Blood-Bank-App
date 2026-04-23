@@ -13,6 +13,7 @@ app.use(morgan("dev"));
 connectDB();
 app.use('/api/v1/auth',require('./routes/authRoute'));
 app.use('/api/v1/inventory',require('./routes/inventoryRoute'))
+app.use('/api/v1/admin',require("./routes/adminRoute"))
 const port=process.env.PORT||8080;
 app.get('/',(req,res)=>{
     res.status(200).json({

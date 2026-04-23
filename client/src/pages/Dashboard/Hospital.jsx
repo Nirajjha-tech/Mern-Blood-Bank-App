@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/shared/Layout/Layout";
 import API from "../../services/Api";
+import { useSelector } from "react-redux";
 import moment from "moment";
 
-const Hospital = () => {
+const Hospitals = () => {
+  const { user } = useSelector((state) => state.auth);
   const [data, setData] = useState([]);
 
-  const getHospitals = async () => {
+  const getData = async () => {
     try {
+      // 🔥 SINGLE API
       const res = await API.get("/inventory/get-hospitals");
 
       if (res?.data?.success) {
-        setData(res.data.hospitals || []);
+        setData(res.data.hospitals|| []);
       }
     } catch (error) {
       console.log(error);
@@ -19,47 +22,38 @@ const Hospital = () => {
   };
 
   useEffect(() => {
-    getHospitals();
-  }, []);
+    if (user) getData();
+  }, [user]);
 
   return (
     <Layout>
-      <table className="table">
-        <thead>
+      <div className="container mt-4">
+        <table className="table">
+<thead>
           <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Address</th>
-            <th>Date</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Address</th>
+            <th scope="col">Date</th>
           </tr>
         </thead>
-
         <tbody>
-          {data.length > 0 ? (
-            data.map((record) => (
-              <tr key={record._id}>
-                <td>{record.hospital?.hospitalName || "No Name"}</td>
-                <td>{record.hospital?.email || "No Email"}</td>
-                <td>{record.hospital?.phone || "N/A"}</td>
-                <td>{record.hospital?.address || "N/A"}</td>
-
-                <td className="text-nowrap">
-                  {moment(record.createdAt).format("DD/MM/YYYY hh:mm A")}
-                </td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="5" className="text-center">
-                No hospitals found
-              </td>
+          {data?.map((record) => (
+            <tr key={record._id}>
+              <td>{record.hospitalName}</td>
+              <td>{record.email}</td>
+              <td>{record.phone}</td>
+              <td>{record.address}</td>
+              <td>{moment(record.createdAt).format("DD/MM/YYYY hh:mm A")}</td>
             </tr>
-          )}
+          ))}
         </tbody>
-      </table>
+
+        </table>
+      </div>
     </Layout>
   );
 };
 
-export default Hospital;
+export default Hospitals;

@@ -51,7 +51,7 @@ const Consumer= () => {
                 <td>{record.bloodgroup|| "No group"}</td>
                  <td>{record.inventoryType || "N/A"}</td>
                    <td>{record.quantity || "No Quantity"}</td>
-                <td>{record.organisation?.email || "No Email"}</td>
+                <td>{record.email || "No Email"}</td>
                
               
 

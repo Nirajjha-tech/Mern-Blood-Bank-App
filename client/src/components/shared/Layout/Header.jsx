@@ -2,9 +2,12 @@ import React from "react";
 import { BiDonateBlood, BiUserCircle } from "react-icons/bi";
 import { FaUserCircle } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 
 const Header = () => {
   const { user } = useSelector((state) => state.auth);
+  const navigate=useNavigate();
+  const location=useLocation();
   //LogOut Handle
   const handleLogout = () => {
     localStorage.clear();
@@ -28,9 +31,26 @@ const Header = () => {
                   user?.organisationName ||
                   user?.hospitalName}{" "}
                 &nbsp;
-                <span className="badge bg-secondary">{user?.role}</span>
+                <span className="badge bg-secondary  ">{user?.role}</span>
+                
+                 
               </p>
             </li>
+             {location.pathname === "/" ||
+            location.pathname === "/donor" ||
+            location.pathname === "/hospital" ? (
+              <li className="nav-item mx-3">
+                <Link to="/analytics" className="nav-link">
+                  Analytics
+                </Link>
+              </li>
+            ) : (
+              <li className="nav-item mx-3">
+                <Link to="/" className="nav-link">
+                  Home
+                </Link>
+              </li>
+            )}
             <li className="nav-item mx-3">
               <button className="btn btn-danger" onClick={handleLogout}>
                 Logout

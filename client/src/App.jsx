@@ -10,6 +10,11 @@ import Hospital from './pages/Dashboard/Hospital';
 import Organisation from './pages/Dashboard/Organisation';
 import Consumer from './pages/Dashboard/Consumer';
 import Donation from './pages/Dashboard/Donation';
+import { Navigate } from "react-router-dom";
+import DonorList from './pages/Admin/DonorList';
+import HospitalList from './pages/Admin/HospitalList';
+import OrganisationList from './pages/Admin/OrganisationList';
+import AdminPage from './pages/Admin/AdminPage';
 function App(){
 return (
   <div>
@@ -22,6 +27,38 @@ return (
           element={
             <ProtectedRoute>
               <HomePage />
+            </ProtectedRoute>
+          }
+        />
+         <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <AdminPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/donor-list"
+          element={
+            <ProtectedRoute>
+              <DonorList/>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/hospital-list"
+          element={
+            <ProtectedRoute>
+              <HospitalList/>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/org-list"
+          element={
+            <ProtectedRoute>
+              <OrganisationList/>
             </ProtectedRoute>
           }
         />
