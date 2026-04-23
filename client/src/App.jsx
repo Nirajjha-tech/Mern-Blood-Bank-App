@@ -15,6 +15,7 @@ import DonorList from './pages/Admin/DonorList';
 import HospitalList from './pages/Admin/HospitalList';
 import OrganisationList from './pages/Admin/OrganisationList';
 import AdminPage from './pages/Admin/AdminPage';
+import Analytics from './pages/Dashboard/Analytics';
 function App(){
 return (
   <div>
@@ -35,6 +36,14 @@ return (
           element={
             <ProtectedRoute>
               <AdminPage />
+            </ProtectedRoute>
+          }
+        />
+         <Route
+          path="/analytics"
+          element={
+            <ProtectedRoute>
+              <Analytics />
             </ProtectedRoute>
           }
         />

@@ -20,11 +20,11 @@ const Organsiation = () => {
       }
 
       else if (user?.role === 'hospital') {
-        const res = await API.get("/inventory/get-hospitals");
-        if (res?.data?.success) {
-          setData(res.data.hospitals || []);
-        }
-      }
+  const res = await API.get("/inventory/get-organisations-for-hospital");
+  if (res?.data?.success) {
+    setData(res.data.organisations || []);
+  }
+}
 
       else if (user?.role === 'organisation') {
         const res = await API.get("/inventory/get-inventory?type=out");
@@ -48,7 +48,7 @@ const Organsiation = () => {
 
         <table className="table">
 
-          {/* 🔥 HEADER CHANGE BASED ON ROLE */}
+          {/*  HEADER CHANGE BASED ON ROLE */}
           <thead>
             {user?.role === "organisation" ? (
               <tr>
