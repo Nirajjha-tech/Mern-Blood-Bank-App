@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import InputType from "./inputType";
+import InputType from "./InputType"; 
 import { Link } from "react-router-dom";
 import { handleLogin, handleRegister } from "../../../services/authService";
 
