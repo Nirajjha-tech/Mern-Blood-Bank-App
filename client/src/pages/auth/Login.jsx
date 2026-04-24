@@ -1,7 +1,7 @@
 import React from "react";
 import Form from "../../components/shared/form/Form";
 import { useSelector } from "react-redux";
-import Spinner from "../../components/shared/spinner";
+import Spinner from "../../components/shared/Spinner";
 const Login = () => {
   const {loading,error}=useSelector(state=>state.auth)
   return (

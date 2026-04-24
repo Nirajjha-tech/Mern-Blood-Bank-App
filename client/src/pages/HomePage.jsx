@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import Spinner from "../components/shared/spinner";
+import Spinner from "../components/shared/Spinner";
 import Layout from "../components/shared/Layout/Layout";
 import { useNavigate } from "react-router-dom";
 import Modal from "../components/shared/modal/Modal";
