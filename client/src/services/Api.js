@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://mern-blood-bank-app-onva.onrender.com",
+  baseURL: "https://mern-blood-bank-app-onva.onrender.com/api/v1",
 });
 API.interceptors.request.use((req) => {
   const token = localStorage.getItem("token");
